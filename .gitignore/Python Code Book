@@ -1,0 +1,166 @@
+!pip install PyPDF2
+
+Requirement already satisfied: PyPDF2 in c:\users\admin\anaconda3\lib\site-packages
+
+You are using pip version 9.0.1, however version 10.0.1 is available.
+You should consider upgrading via the 'python -m pip install --upgrade pip' command.
+
+!pip install nltk
+
+Requirement already satisfied: nltk in c:\users\admin\anaconda3\lib\site-packages
+Requirement already satisfied: six in c:\users\admin\anaconda3\lib\site-packages (from nltk)
+
+You are using pip version 9.0.1, however version 10.0.1 is available.
+You should consider upgrading via the 'python -m pip install --upgrade pip' command.
+
+!pip install textract
+
+Collecting textract
+  Using cached https://files.pythonhosted.org/packages/e0/00/a9278b3672a31da06394eb588a16e96f8fce9f6ae0ed44cca18103d4aef5/textract-1.6.1.tar.gz
+Collecting argcomplete==1.8.2 (from textract)
+  Using cached https://files.pythonhosted.org/packages/f0/0f/f965f1520e6ba24b63320919eecfbe3d03debd32402e0c61a08e8fa02d17/argcomplete-1.8.2-py2.py3-none-any.whl
+Collecting chardet==2.3.0 (from textract)
+  Using cached https://files.pythonhosted.org/packages/7e/5c/605ca2daa5cf21c87690d8fe6ab05a6f2278c451f4ede6456dd26453f4bd/chardet-2.3.0-py2.py3-none-any.whl
+Collecting python-pptx==0.6.5 (from textract)
+  Using cached https://files.pythonhosted.org/packages/f8/9c/30bc244cedc571307efe0780d8195ffed5b08f09c94d23f50d6d5144ebc7/python-pptx-0.6.5.tar.gz
+Collecting docx2txt==0.6 (from textract)
+  Using cached https://files.pythonhosted.org/packages/aa/72/f02730ec3b0219d8f783a255416339b02ff8b6a300c817abf0505833212a/docx2txt-0.6.tar.gz
+Collecting beautifulsoup4==4.5.3 (from textract)
+  Using cached https://files.pythonhosted.org/packages/af/a3/9e803f838b3eeb313d45d916d4387cda8572c92e1aafeb53fd43ddb5da2c/beautifulsoup4-4.5.3-py3-none-any.whl
+Collecting xlrd==1.0.0 (from textract)
+  Using cached https://files.pythonhosted.org/packages/0c/b0/8946fe3f9c2690c164aaa88dfd43b56347d3cdeac34124b988acd1aaa151/xlrd-1.0.0-py3-none-any.whl
+Collecting EbookLib==0.15 (from textract)
+  Using cached https://files.pythonhosted.org/packages/04/30/2cbf65fa9587a1ecc66a78eea91f9189ead8fdadd5e009115bce34529aa6/EbookLib-0.15.tar.gz
+    Complete output from command python setup.py egg_info:
+    Traceback (most recent call last):
+      File "<string>", line 1, in <module>
+      File "C:\Users\Admin\AppData\Local\Temp\pip-build-q6smfkdo\EbookLib\setup.py", line 13, in <module>
+        long_description = open('README.md').read(),
+      File "C:\Users\Admin\Anaconda3\lib\encodings\cp1252.py", line 23, in decode
+        return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+    UnicodeDecodeError: 'charmap' codec can't decode byte 0x8d in position 1671: character maps to <undefined>
+    
+    ----------------------------------------
+
+Command "python setup.py egg_info" failed with error code 1 in C:\Users\Admin\AppData\Local\Temp\pip-build-q6smfkdo\EbookLib\
+You are using pip version 9.0.1, however version 10.0.1 is available.
+You should consider upgrading via the 'python -m pip install --upgrade pip' command.
+
+import PyPDF2
+
+from nltk.tokenize import word_tokenize
+
+​
+
+-m pip install textract
+
+  File "<ipython-input-5-a8adfccbae88>", line 1
+    -m pip install textract
+         ^
+SyntaxError: invalid syntax
+
+
+import textract
+
+---------------------------------------------------------------------------
+ModuleNotFoundError                       Traceback (most recent call last)
+<ipython-input-6-6aeb94a7f383> in <module>()
+----> 1 import textract
+
+ModuleNotFoundError: No module named 'textract'
+
+filename = 'E:\\Assignment\\JavaBasics-notes.pdf'
+
+pdfFileObj = open(filename,'rb')
+
+pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
+
+num_pages = pdfReader.numPages
+
+count = 0
+
+text = ""
+
+while count < num_pages:
+
+    pageObj = pdfReader.getPage(count)
+
+    count +=1
+
+    text += pageObj.extractText()
+
+if text != "":
+
+   text = text
+
+else:
+
+   text = textract.process(fileurl, method='tesseract', language='eng')
+
+import nltk
+
+nltk.download('punkt')
+
+[nltk_data] Downloading package punkt to
+[nltk_data]     C:\Users\Admin\AppData\Roaming\nltk_data...
+[nltk_data]   Unzipping tokenizers\punkt.zip.
+
+True
+
+from nltk import word_tokenize,sent_tokenize
+
+tokens = word_tokenize(text)
+
+nltk.download('stopwords')
+
+[nltk_data] Downloading package stopwords to
+[nltk_data]     C:\Users\Admin\AppData\Roaming\nltk_data...
+[nltk_data]   Unzipping corpora\stopwords.zip.
+
+True
+
+from nltk.corpus import stopwords
+
+stop_words = stopwords.words('english')
+
+import string
+
+keywords = [word for word in tokens if not word in stop_words]
+
+keywords = [word for word in tokens if not word in stop_words and not word in string.punctuation]
+
+keywords
+
+['Java',
+ 'Basics©',
+ '1996-2003',
+ 'jGuru.com',
+ 'All',
+ 'Rights',
+ 'Reserved.Java',
+ 'Basics',
+ '-1Java',
+ 'BasicsTopics',
+ 'section',
+ 'include',
+ 'What',
+ 'makes',
+ 'Java',
+ 'programs',
+ 'portable',
+ 'secure',
+ 'robust',
+ 'The']
+
+import pandas as pd
+
+Keywords_Final = pd.DataFrame({'Keywords':keywords})
+
+Keywords_Final.head()
+
+	Keywords
+0 	Java
+1 	Basics©
+2 	1996-2003
+3 	jGuru.com
+4 	All
